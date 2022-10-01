@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+generator pothos {
+  provider     = "prisma-pothos-types"
+  clientOutput = "@prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
